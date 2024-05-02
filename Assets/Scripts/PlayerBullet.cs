@@ -19,7 +19,7 @@ public class PlayerBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(DespawnTimer(despawnTime));
+
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class PlayerBullet : MonoBehaviour
         range -= speed * Time.deltaTime;
         if (range <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
     }
@@ -38,14 +38,13 @@ public class PlayerBullet : MonoBehaviour
     {
         var other = collision.collider;
 
-        /* Deals damage to destructible objects. Dependant on Class TakeDamageFromBullet
         if (other.gameObject.GetComponent<TakeDamageFromBullet>())
         {
             var objectToDamage = other.gameObject.GetComponent<TakeDamageFromBullet>();
 
-            objectToDamage.currentHealth -= damage;
+            objectToDamage.TakeDamage(damage);
         }
-        */
+
         if (!other.gameObject.GetComponent<PlayerController>())
         {
             Destroy(gameObject);
