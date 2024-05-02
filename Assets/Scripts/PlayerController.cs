@@ -1,21 +1,32 @@
 /*
  * Author: Sean Gibson
- * Last Updated: 4/30/24
- * Controls Player Movement
+ * Last Updated: 5/2/24
+ * Controls Player Movement, Shooting, Health
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    //Movement Vars
+
+    [Header("Health Vars")]
+    public int lives = 3;
+    public int maxHealth = 3;
+    private int currentHealth = 0;
+    private bool invincible = false;
+
+    public int deathSceneIndex;
+    public Vector3 startPosition;
+
+    [Header("Movement Vars")]
     public float speed;
     private Rigidbody rb;
 
-    //Shooting Vars
+    [Header("Shooting Vars")]
     public GameObject bulletPrefab;
     private bool canShoot = true;
 
@@ -32,6 +43,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth;
+
         rb = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
     }
@@ -41,6 +54,93 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         PlayerShoot();
+
+        if (Input.GetKeyDown(KeyCode.R)) //temp code for damage testing
+        {
+            TakeDamage(1);
+        }
+    }
+
+    /// <summary>
+    /// Makes the player's mesh blink and turns them invincible for given seconds
+    /// </summary>
+    /// <param name="seconds"></param>
+    /// <returns></returns>
+    private IEnumerator DoInvincibleSeconds(float seconds)
+    {
+        invincible = true;
+        for (int i = 0; i < seconds*10; i++)
+        {
+            if (i % 2 == 0)
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().enabled = true;
+            }
+            yield return new WaitForSeconds(.1f);
+
+            GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        invincible = false;
+    }
+
+    /// <summary>
+    /// Respawns the Player
+    /// </summary>
+    private void Respawn()
+    {
+        transform.position = startPosition;
+        currentHealth = maxHealth;
+        StartCoroutine("DoInvincibleSeconds", 5);
+    }
+
+    /// <summary>
+    /// Sends the Player to the Game Over Scene
+    /// </summary>
+    private void OnGameOver()
+    {
+        SceneManager.LoadScene(deathSceneIndex);
+    }
+
+    /// <summary>
+    /// Applies Damage to the Player's health, and if health is depleted, subtracts a life and calls OnGameOver() or Respawn()
+    /// </summary>
+    /// <param name="damage"></param>
+    public void TakeDamage(int damage)
+    {
+        if (invincible == false)
+        {
+            currentHealth -= damage;
+
+            Debug.Log("HP: " + currentHealth.ToString()); //temp code
+
+            if (currentHealth <= 0)
+            {
+                lives -= 1;
+
+                Debug.Log("Lives: " + lives.ToString()); //temp code
+
+                if (lives <= 0)
+                {
+                    OnGameOver();
+                }
+                else
+                {
+                    Respawn();
+                }
+            }
+            else
+            {
+                StartCoroutine("DoInvincibleSeconds", 3);
+            }
+        }
+        else
+        {
+            Debug.Log("Currently Invincible!"); //temp code
+        }
     }
 
     /// <summary>
@@ -107,6 +207,7 @@ public class PlayerController : MonoBehaviour
         var shootVector = GetArrowKeyVector();
         if (shootVector != Vector3.zero && canShoot == true)
         {
+            bulletsShot++;
             GameObject newBullet = Instantiate(bulletPrefab);
             PlayerBullet newBulletScript = newBullet.GetComponent<PlayerBullet>();
 
