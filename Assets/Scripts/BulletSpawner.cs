@@ -19,10 +19,10 @@ public class BulletSpawner : MonoBehaviour
 
    void Update()
    {
-	timer += Time.deltaTIme;
+	timer += Time.deltaTime;
 	if(spawnerType == SpawnerType.Spin) transform.eulerAngles = new Vector3(0f,0f,transform.eulerAngles.z+1f);
 	if(timer >= firingRate) {
-		Fire();
+		//Fire();
 		timer = 0;
 	}
    }
