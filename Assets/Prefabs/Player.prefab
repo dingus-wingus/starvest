@@ -146,6 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd30559e7bab8b468b7521276445a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 3
+  maxHealth: 3
+  deathSceneIndex: 3
+  startPosition: {x: 0, y: 0, z: 0}
   speed: 10
   bulletPrefab: {fileID: 873307041159839590, guid: a2aaca7800196ad4ebdede92124ee67d, type: 3}
   fireRate: 0.1

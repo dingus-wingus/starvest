@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Switch : MonoBehaviour
+public class SceneSwitcher : MonoBehaviour
 {
     /// Switch  Script
     /// Kozeng Yang
