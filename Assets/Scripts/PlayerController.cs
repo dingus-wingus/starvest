@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public Health healthbar;
 
     [Header("Health Vars")]
     public int lives = 3;
@@ -115,6 +116,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
         if (invincible == false)
         {
             currentHealth -= damage;
