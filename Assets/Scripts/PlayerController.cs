@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
         currentHealth = maxHealth;
-
         
     }
 

@@ -34,20 +34,14 @@ public class PlayerBullet : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var other = collision.collider;
-
-        /* Deals damage to destructible objects. Dependant on Class TakeDamageFromBullet
         if (other.gameObject.GetComponent<TakeDamageFromBullet>())
         {
             var objectToDamage = other.gameObject.GetComponent<TakeDamageFromBullet>();
 
-            objectToDamage.currentHealth -= damage;
-        }
-        */
-        if (!other.gameObject.GetComponent<PlayerController>())
-        {
+            objectToDamage.TakeDamage(damage);
+
             Destroy(gameObject);
         }
     }
