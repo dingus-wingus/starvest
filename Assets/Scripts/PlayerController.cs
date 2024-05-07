@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
         currentHealth = maxHealth;
+
+        healthbar.SetMaxHealth(maxHealth);
+        healthbar.SetHealth(currentHealth);
         
     }
 
@@ -99,6 +102,7 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         currentHealth = maxHealth;
         StartCoroutine("DoInvincibleSeconds", 5);
+        healthbar.SetHealth(currentHealth);
     }
 
     /// <summary>
@@ -115,11 +119,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthbar.SetHealth(currentHealth);
         if (invincible == false)
         {
             currentHealth -= damage;
+            healthbar.SetHealth(currentHealth);
 
             Debug.Log("HP: " + currentHealth.ToString()); //temp code
 
