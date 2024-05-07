@@ -34,13 +34,10 @@ public class PlayerController : MonoBehaviour
     public float range;
     public float bulletSpeed;
     public int damage;
-    public int maxHealth = 100;
-    public Health healthBar;
     private int bulletsShot = 0;
 
     private MeshRenderer mesh;
 
-    public int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -232,10 +229,5 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
-    }
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        healthBar.SetMaxHealth(currentHealth);
     }
 }
