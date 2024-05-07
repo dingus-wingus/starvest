@@ -34,19 +34,14 @@ public class PlayerBullet : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var other = collision.collider;
-
         if (other.gameObject.GetComponent<TakeDamageFromBullet>())
         {
             var objectToDamage = other.gameObject.GetComponent<TakeDamageFromBullet>();
 
             objectToDamage.TakeDamage(damage);
-        }
 
-        if (!other.gameObject.GetComponent<PlayerController>())
-        {
             Destroy(gameObject);
         }
     }

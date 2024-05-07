@@ -31,9 +31,8 @@ public class Bullet : MonoBehaviour
         return new Vector2(x + spawnPoint.x, y + spawnPoint.y);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var other = collision.collider;
 
         if (other.GetComponent<PlayerController>())
         {
