@@ -16,4 +16,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(buildIndex);
     }
+
+    /// robert - make a point script and make it so after 10 kills, it will switch the scene
+
 }
