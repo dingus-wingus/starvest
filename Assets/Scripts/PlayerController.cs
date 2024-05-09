@@ -116,8 +116,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthbar.SetHealth(currentHealth);
+        
+        
         if (invincible == false)
         {
             currentHealth -= damage;
@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Currently Invincible!"); //temp code
         }
+        healthbar.SetHealth(currentHealth);
     }
 
     /// <summary>
