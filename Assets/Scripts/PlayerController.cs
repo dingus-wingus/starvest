@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Currently Invincible!"); //temp code
         }
+        healthbar.SetHealth(currentHealth);
     }
 
     /// <summary>
