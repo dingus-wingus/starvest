@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class TakeDamageFromBullet : MonoBehaviour
@@ -9,6 +10,8 @@ public class TakeDamageFromBullet : MonoBehaviour
     public int currentHealth = 1;
 
     public MeshRenderer mesh;
+
+    public UnityEvent onHealthDepleted;
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +37,8 @@ public class TakeDamageFromBullet : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            Die();
+            onHealthDepleted.Invoke();
         }
         StartCoroutine("Blink");
     }
-
-    /// <summary>
-    /// Disables Self
-    /// </summary>
-    void Die()
-    {
-        Destroy(gameObject);
-    }
-
 }
