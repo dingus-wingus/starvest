@@ -231,7 +231,7 @@ MonoBehaviour:
   horizontalRange: {x: -8.4, y: 8.4}
   verticalRange: {x: 5.4, y: -3.4}
   spawnRate: 7
-  enemiesSpawnedPerCycle: 1
+  enemiesSpawnedPerCycle: 2
   enemyPrefabs:
   - {fileID: 8750288523216693504, guid: 9a6af6eaf02c7794b8368984ab12a162, type: 3}
   - {fileID: 8750288523216693504, guid: ceb77d0bd8141a847926803044f8c07c, type: 3}
@@ -740,6 +740,7 @@ MonoBehaviour:
   score: 0
   enemyLimit: 2
   currentLevel: 0
+  enemyKillQuota: 0
   enemiesPresent: 0
   enemyList:
   - {fileID: 8750288523216693504, guid: ceb77d0bd8141a847926803044f8c07c, type: 3}
