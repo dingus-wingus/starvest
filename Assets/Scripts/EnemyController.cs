@@ -9,20 +9,16 @@ public class EnemyController : MonoBehaviour
     public Rigidbody rb;
     private Vector3 velocityVector = Vector3.zero;
 
-    [Header("References")]
-    public LevelManager levelManager;
-
-    [Header("Score Parameters")]
+    [Header("Reward Parameters")]
     public int pointReward = 100;
+    public int itemDropChance = 100;
+    public List<GameObject> itemPrefabs;
+
+    public bool dead = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (levelManager)
-        {
-            levelManager.enemiesPresent++;
-        }
-
         rb = GetComponent<Rigidbody>();
         int rand = Random.Range(1, 4);
 
@@ -55,9 +51,18 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
-        levelManager.enemiesPresent -= 1;
-        levelManager.score += pointReward;
+
+        int itemDropCheck = Random.Range(1, 100);
+
+        if (itemDropCheck <= itemDropChance)
+        {
+            int randomItemIndex = Random.Range(0, itemPrefabs.Count);
+
+            GameObject newItem = Instantiate(itemPrefabs[randomItemIndex]);
+            newItem.transform.position = transform.position;
+        }
+
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)

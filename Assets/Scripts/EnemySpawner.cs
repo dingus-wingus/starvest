@@ -1,5 +1,12 @@
+/*
+ * Author: Sean Gibson
+ * Last Updated: 5/10/24
+ * Spawns Enemies at the edges of the screen
+ */
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,40 +21,95 @@ public class EnemySpawner : MonoBehaviour
 
     public float spawnRate;
     public int enemiesSpawnedPerCycle;
+    public int enemyTypesPerStage;
+    public int maxEnemiesPresent = 2;
 
     [Header("Enemies")]
-    public GameObject[] enemyPrefabs;
+    public List<GameObject> enemyPrefabs;
+    private List<GameObject> stageEnemies = new List<GameObject>();
+    public List<GameObject> enemiesPresent = new List<GameObject>();
 
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemy();
-        InvokeRepeating("SpawnEnemy", spawnRate, spawnRate);
+        SetStageEnemies();
+
+        InvokeRepeating("SpawnEnemy", 1, spawnRate);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        foreach (GameObject enemy in enemiesPresent.ToList())
         {
-            SpawnEnemy();
+            if (enemy.activeSelf == false)
+            {
+                Debug.Log("Enemy Died");
+                enemiesPresent.Remove(enemy);
+                levelManager.OnEnemyDeath(100);
+
+                if (enemiesPresent.Count <= 0)
+                {
+                    StartCoroutine(SpawnEnemyInOneSecond());
+                }
+
+                Destroy(enemy);
+            }
         }
     }
 
-    private void SpawnEnemy()
+    private IEnumerator SpawnEnemyInOneSecond()
+    {
+        yield return new WaitForSeconds(1);
+        SpawnEnemy();
+    }
+
+    /// <summary>
+    /// Sets the enemies that will spawn this stage
+    /// </summary>
+    public void SetStageEnemies()
+    {
+        List<GameObject> enemyPrefabsCopy = new List<GameObject>();
+
+        foreach (GameObject enemyPrefab in enemyPrefabs)
+        {
+            enemyPrefabsCopy.Add(enemyPrefab);
+        }
+
+        stageEnemies.Clear();
+
+        for (int i = 0; i < enemyTypesPerStage; i++)
+        {
+            int randomEnemyIndex = Random.Range(0, enemyPrefabsCopy.Count-1);
+            stageEnemies.Add(enemyPrefabsCopy[randomEnemyIndex]);
+
+            enemyPrefabsCopy.Remove(enemyPrefabsCopy[randomEnemyIndex]);
+        }
+        enemyPrefabsCopy.Clear();
+
+        for (int i = 0; i < stageEnemies.Count; i++)
+        {
+            print(stageEnemies[i].ToString());
+        }
+    }
+
+    /// <summary>
+    /// Spawns enemies equal to enemiesSpawnedPerCycle. Stops spawning if LevelManager.enemyLimit is reached
+    /// </summary>
+    public void SpawnEnemy()
     {
         int previousSpawnRegion = 0;
 
         for (int i = 0; i < enemiesSpawnedPerCycle; i++)
         {
-            if (levelManager.enemiesPresent >= levelManager.enemyLimit)
+            if (enemiesPresent.Count >= maxEnemiesPresent)
             {
                 Debug.Log("Too Many Enemies!");
                 return;
             }
-
-            GameObject enemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            
+            GameObject selectedPrefab = stageEnemies[Random.Range(0, stageEnemies.Count)];
             int spawnRegion = Random.Range(1, 4);
 
             if (spawnRegion == previousSpawnRegion)
@@ -61,7 +123,7 @@ public class EnemySpawner : MonoBehaviour
 
             Vector3 spawnPosition = Vector3.zero;
 
-            Instantiate(enemy);
+            var enemy = Instantiate(selectedPrefab);
 
             if (spawnRegion == 1)
             {
@@ -85,8 +147,10 @@ public class EnemySpawner : MonoBehaviour
             }
 
             enemy.transform.position = spawnPosition;
-            enemy.GetComponent<EnemyController>().levelManager = levelManager;
+
             previousSpawnRegion = spawnRegion;
+
+            enemiesPresent.Add(enemy);
         }
     }
 }

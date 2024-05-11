@@ -35,10 +35,10 @@ public class TakeDamageFromBullet : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        StartCoroutine("Blink");
         if (currentHealth <= 0)
         {
             onHealthDepleted.Invoke();
         }
-        StartCoroutine("Blink");
     }
 }
