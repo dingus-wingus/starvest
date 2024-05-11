@@ -223,8 +223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 3521644460842495237}
-  lives: 3
-  maxHealth: 3
+  lives: 4
+  maxHealth: 4
+  currentHealth: 0
+  invincible: 0
   deathSceneIndex: 3
   startPosition: {x: 0, y: 0, z: 0}
   speed: 10

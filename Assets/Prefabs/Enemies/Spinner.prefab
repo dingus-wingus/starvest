@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8750288523216693504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.040223, y: 5.4, z: 0}
+  m_LocalPosition: {x: -4.9936543, y: -3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -160,8 +160,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   rb: {fileID: 5314032922806670379}
-  levelManager: {fileID: 0}
   pointReward: 100
+  itemDropChance: 20
+  itemPrefabs:
+  - {fileID: 269896535401615656, guid: ee53967b2adff3047af5b83730f84058, type: 3}
+  - {fileID: 269896535401615656, guid: 3e8b4c18ec51dab498abe60cef706ca9, type: 3}
+  - {fileID: 269896535401615656, guid: 53bbc291ae0f45141a7ae768b7527ab9, type: 3}
+  - {fileID: 269896535401615656, guid: b28c1db21b2f57a4eb630d629656c9e3, type: 3}
+  dead: 0
 --- !u!65 &1341697281846053605
 BoxCollider:
   m_ObjectHideFlags: 0

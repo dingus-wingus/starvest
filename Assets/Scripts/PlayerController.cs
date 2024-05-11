@@ -6,19 +6,20 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Health healthbar;
-
     [Header("Health Vars")]
     public int lives = 3;
     public int maxHealth = 3;
-    private int currentHealth = 0;
-    private bool invincible = false;
+    public int currentHealth = 0;
+    public bool invincible = false;
+    public Health healthbar;
+    public TMP_Text livesDisplay;
 
     public int deathSceneIndex;
     public Vector3 startPosition;
@@ -62,10 +63,6 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         PlayerShoot();
 
-        if (Input.GetKeyDown(KeyCode.R)) //temp code for damage testing
-        {
-            TakeDamage(1);
-        }
     }
 
     /// <summary>
@@ -103,6 +100,8 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         StartCoroutine("DoInvincibleSeconds", 5);
         healthbar.SetHealth(currentHealth);
+
+        livesDisplay.text = "Lives: " + lives.ToString();
     }
 
     /// <summary>
@@ -124,13 +123,11 @@ public class PlayerController : MonoBehaviour
             currentHealth -= damage;
             healthbar.SetHealth(currentHealth);
 
-            Debug.Log("HP: " + currentHealth.ToString()); //temp code
 
             if (currentHealth <= 0)
             {
                 lives -= 1;
 
-                Debug.Log("Lives: " + lives.ToString()); //temp code
 
                 if (lives <= 0)
                 {
@@ -145,10 +142,6 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine("DoInvincibleSeconds", 3);
             }
-        }
-        else
-        {
-            Debug.Log("Currently Invincible!"); //temp code
         }
         healthbar.SetHealth(currentHealth);
     }
