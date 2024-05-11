@@ -12,7 +12,9 @@ public class IncreaseRange : MonoBehaviour
 {
     public PlayerController playerController;
 
-
+    /// <summary>
+    /// increases player's range
+    /// </summary>
     public void RangeUp()
     {
         playerController = gameObject.GetComponent<Pickup>().playerController;

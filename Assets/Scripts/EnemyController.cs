@@ -1,3 +1,9 @@
+/*
+ * Author: Sean Gibson
+ * Last Updated: 5/10/24
+ * This script controls enemy movement and dropping items on death
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +55,9 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets Active to false and randomly drops an item
+    /// </summary>
     public void Die()
     {
 

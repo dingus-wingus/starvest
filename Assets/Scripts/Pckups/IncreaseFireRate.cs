@@ -12,7 +12,9 @@ public class IncreaseFireRate : MonoBehaviour
 {
     public PlayerController playerController;
 
-
+    /// <summary>
+    /// decreases cooldown between player's shots
+    /// </summary>
     public void FireRateUp()
     {
         playerController = gameObject.GetComponent<Pickup>().playerController;

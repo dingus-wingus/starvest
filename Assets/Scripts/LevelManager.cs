@@ -1,7 +1,7 @@
 /*
  * Author: Sean Gibson
  * Last Updated: 5/10/24
- * Keeps track of score, enemies present, enemies killed, and current stage
+ * Keeps track of current stage and enemies killed
  */
 
 using System.Collections;
@@ -29,6 +29,10 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// function called when an enemy dies, updates kill count, advances the stage, and updates UI
+    /// </summary>
+    /// <param name="pointsToAdd"></param>
     public void OnEnemyDeath(int pointsToAdd)
     {
         enemiesKilledThisStage++;
@@ -41,6 +45,9 @@ public class LevelManager : MonoBehaviour
         killsDisplay.text = "Kills: " + enemiesKilledThisStage.ToString() + "/" + stageKillQuota.ToString();
     }
 
+    /// <summary>
+    /// advances to the next stage and increases the difficulty
+    /// </summary>
     private void AdvanceStage()
     {
         if (currentStage >= 5)

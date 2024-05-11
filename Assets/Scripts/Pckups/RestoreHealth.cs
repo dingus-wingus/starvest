@@ -13,7 +13,9 @@ public class RestoreHealth : MonoBehaviour
     public PlayerController playerController;
     public int healAmount = 10;
 
-
+    /// <summary>
+    /// heals the player
+    /// </summary>
     public void HealPlayer()
     {
         playerController = gameObject.GetComponent<Pickup>().playerController;

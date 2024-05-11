@@ -1,7 +1,7 @@
 /*
  * Author: Sean Gibson
  * Last Updated: 5/10/24
- * Spawns Enemies at the edges of the screen
+ * Spawns Enemies at the edges of the screen and keeps track of which enemies are active
  */
 
 using System.Collections;
@@ -59,6 +59,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// calls SpawnEnemy() after 1 second
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator SpawnEnemyInOneSecond()
     {
         yield return new WaitForSeconds(1);
@@ -95,7 +99,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns enemies equal to enemiesSpawnedPerCycle. Stops spawning if LevelManager.enemyLimit is reached
+    /// Spawns enemies equal to enemiesSpawnedPerCycle. Stops spawning if maxEnemiesPresent is reached
     /// </summary>
     public void SpawnEnemy()
     {

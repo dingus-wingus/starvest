@@ -1,6 +1,6 @@
 /*
  * Author: Sean Gibson
- * Last Updated: 5/2/24
+ * Last Updated: 5/10/24
  * Controls Player Movement, Shooting, Health
  */
 
@@ -226,6 +226,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Does the cooldown for shooting
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator StartShotCooldown()
     {
         yield return new WaitForSeconds(fireRate);

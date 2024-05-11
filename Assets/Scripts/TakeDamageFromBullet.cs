@@ -1,3 +1,9 @@
+/*
+ * Author: Sean Gibson
+ * Last Updated: 5/10/24
+ * Gives a GameObject Health, Blinks the mesh once when taking damage, and invokes onHealthDepleted when health reaches 0
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +31,10 @@ public class TakeDamageFromBullet : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// blinks the mesh once
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Blink()
     {
         mesh.enabled = false;
@@ -32,6 +42,10 @@ public class TakeDamageFromBullet : MonoBehaviour
         mesh.enabled = true;
     }
 
+    /// <summary>
+    /// applies int damage to the object's health, if health <= 0, invokes onHealthDepleted
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;

@@ -12,7 +12,9 @@ public class IncreaseDamage : MonoBehaviour
 {
     public PlayerController playerController;
 
-
+    /// <summary>
+    /// raises player's damage
+    /// </summary>
     public void DamageUp()
     {
         playerController = gameObject.GetComponent<Pickup>().playerController;
