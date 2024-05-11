@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// Fade  Script
+/// Kozeng Yang 
+// 4/30/24
 public class Fade : MonoBehaviour
+
+ 
 {
     // Start is called before the first frame update
     public float fadeTime;
@@ -18,6 +23,9 @@ public class Fade : MonoBehaviour
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// Makes the Text fade after 10 seconds
+    /// </summary>
     void Update()
     {
         if(fadeTime > 0)
