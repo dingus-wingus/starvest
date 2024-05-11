@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     /// Switch  Script
-    /// Kozeng Yang
+    /// Kozeng Yang && Robert Longenbach
     // 4/30/24
     public void QuitGame()
     {
@@ -14,9 +14,12 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void SwitchScene(int buildIndex)
     {
-        SceneManager.LoadScene(buildIndex);
+        SceneManager.LoadScene(1);
     }
 
-    /// robert - make a point script and make it so after 10 kills, it will switch the scene
+    public void SwitchSceneMenu(int buildIndex)
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }

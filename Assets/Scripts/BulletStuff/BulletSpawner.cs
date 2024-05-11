@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/// Robert L, Bullet Spawner script for enemies.
+
 public class BulletSpawner : MonoBehaviour
 {
+	/// Robert Longenbach
+	/// This script is for bullets to be spawned and modified
+	/// 5-5-24
    enum SpawnerType { Straight, Spin }
    [Header("Bullet Attributes")]
    public GameObject bullet;

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    /// Robert Longenbach
+    /// This script is for the bullets that the enemies shoot. 
+    /// 5-5-24
     public float bulletLife = 1f;
     public float rotation = 0f;
     public float speed = 1f;
