@@ -45,7 +45,7 @@ public class LevelManager : MonoBehaviour
     {
         if (currentStage >= 5)
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(2);
         }
 
         Debug.Log("Advancing to next Stage");

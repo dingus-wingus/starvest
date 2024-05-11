@@ -2027,7 +2027,7 @@ PrefabInstance:
       objectReference: {fileID: 201390404}
     - target: {fileID: 3823043428935239394, guid: 6f04ff64db2131745a48312369d6da7d, type: 3}
       propertyPath: deathSceneIndex
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
